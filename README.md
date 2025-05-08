@@ -1,3 +1,9 @@
+installation
+-------------
+```bash
+pip install -r requirements.txt
+bash download_demo_corpus.sh
+```
 CoT prompt
 ------------------------
 ```python
