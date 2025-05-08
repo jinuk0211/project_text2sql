@@ -42,6 +42,7 @@ def parse_args():
     parser.add_argument(
         "--huggingface",
         type=bool,
+        default = True
         help="허깅페이스 모델일 경우"
     )
 
