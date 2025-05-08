@@ -1,7 +1,5 @@
 import json
 
-uri = "sqlite:///../Chinook.db"
-
 def get_table_info():
     with open('../db_metadata/chinook_schema.json', 'r') as file:
         schema_data = json.load(file)
@@ -14,11 +12,10 @@ def get_table_info():
     return tables_dict
 
 # Test
-table_info = get_table_info()
-for table_name, table_desc in table_info.items():
-    print(f"Table: {table_name}")
-    print(f"Description: {table_desc}")
-    print()
+# for table_name, table_desc in table_info.items():
+#     print(f"Table: {table_name}")
+#     print(f"Description: {table_desc}")
+#     print()
     
 def get_table_columns(tables=None):
     with open('../db_metadata/chinook_schema.json', 'r') as file:
@@ -37,5 +34,5 @@ def get_table_columns(tables=None):
     return table_columns
 
 # Test
-tables = ["Album", "Customer"]
-get_table_columns(tables)
+# tables = ["Album", "Customer"]
+# get_table_columns(tables)

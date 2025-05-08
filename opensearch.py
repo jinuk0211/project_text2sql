@@ -3,9 +3,9 @@ import boto3
 import yaml
 from opensearchpy import OpenSearch, RequestsHttpConnection, AWSV4SignerAuth
 
-boto_session = boto3.Session()
-region_name = boto_session.region_name
-INDEX_NAME = "example_queries"
+# boto_session = boto3.Session()
+# region_name = boto_session.region_name
+# INDEX_NAME = "example_queries"
 
 def load_opensearch_config():
     with open("./libs/opensearch.yml", 'r', encoding='utf-8') as file:
@@ -39,9 +39,9 @@ def create_os_index(client, mapping):
 
     client.indices.create(INDEX_NAME, body=mapping)
 
-
-config = load_opensearch_config()
-os_client = init_opensearch(config)
+#test
+# config = load_opensearch_config()
+# os_client = init_opensearch(config)
 
 
      
@@ -50,8 +50,8 @@ os_client = init_opensearch(config)
 
 import os
 
-FILE_PATH_2 = '../db_metadata/example_queries.jsonl'
-embed_model = "amazon.titan-embed-text-v2:0"
+# FILE_PATH_2 = '../db_metadata/example_queries.jsonl'
+# embed_model = "amazon.titan-embed-text-v2:0"
 
 def input_embedding():
     num = 0
@@ -82,21 +82,21 @@ def input_embedding():
 
             num += 1    
 
-input_embedding()
+# input_embedding()
 
 
      
 # In the db_metadata/example_queries.jsonl file, you can see the converted embeddings.
 
-
-with open(FILE_PATH_2, 'r') as file:
-    bulk_data = file.read()
+#test
+# with open(FILE_PATH_2, 'r') as file:
+#     bulk_data = file.read()
         
-response = os_client.bulk(body=bulk_data)
-if response["errors"]:
-    print("There were errors during bulk indexing:")
-    for item in response["items"]:
-        if 'index' in item and item['index']['status'] >= 400:
-            print(f"Error: {item['index']['error']['reason']}")
-else:
-    print("Bulk-inserted all items successfully.")
+# response = os_client.bulk(body=bulk_data)
+# if response["errors"]:
+#     print("There were errors during bulk indexing:")
+#     for item in response["items"]:
+#         if 'index' in item and item['index']['status'] >= 400:
+#             print(f"Error: {item['index']['error']['reason']}")
+# else:
+#     print("Bulk-inserted all items successfully.")

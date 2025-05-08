@@ -1,3 +1,7 @@
+dialect = "sqlite"
+top_k = 10
+# table_info = schema['Customer']
+
 sys_prompt = [{
     "text": f"""You are a {dialect} expert.
 Given an input question, first create a syntactically correct SQLite query to run.
@@ -10,6 +14,13 @@ Only use the following tables:
 {table_info}
 """ 
 }]
+
+def get_user_prompt(question):
+    return [{
+        "role": "user",
+        "content": [{"text": f"Question:\n{question}]\n\nSkip the preamble and provide only the SQL."
+        }]
+    }]
 
 #cot 버젼
 sys_prompt = [{
