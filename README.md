@@ -52,33 +52,7 @@ try:
 except Exception as e:
     print(f"압축 해제 중 오류 발생: {e}")
 ```
-CoT prompt
-------------------------
-```python
-print(sys_prompt[0]["text"])
 
-question = "Find the average invoice total for each country, but only for countries with more than 5 customers, ordered by the average total descending."
-user_prompt = get_user_prompt(question)
-print(user_prompt[0]["content"][0]["text"])
-
-response = converse_with_bedrock(boto3_client, sys_prompt, user_prompt)
-print(response)
-    
-
-thought_process = response.split('<thought_process>')[1].split('</thought_process>')[0].strip()
-sql = response.split('<sql>')[1].split('</sql>')[0].strip()
-
-print("Thought:\n", thought_process)
-print("\nSQL:\n", sql)
-
-
-sql_query = text(sql)
-with Session(engine) as session:
-    result = session.execute(sql_query)
-    for row in result:
-        print(row)
-    
-```
 example retrieve for prompt generation
 ------------------
 ```python
@@ -110,4 +84,44 @@ for i, (similarity, doc) in enumerate(top_similar_samples, 1):
     samples += f"Query: {doc['query']}\n"
 
 print(samples)    
+```
+
+CoT prompt
+------------------------
+```python
+sys_prompt = [{
+    "text": f"""You are a {dialect} expert.
+Given an input question, first create a syntactically correct SQLite query to run.
+Unless the user specifies in the question a specific number of examples to obtain, query for at most {top_k} results using the LIMIT clause as per SQLite. You can order the results to return the most informative data in the database.
+Never query for all columns from a table. You must query only the columns that are needed to answer the question. Wrap each column name in double quotes (") to denote them as delimited identifiers.
+Pay attention to use only the column names you can see in the tables below. Be careful to not query for columns that do not exist. Also, pay attention to which column is in which table.
+Pay attention to use date(\'now\') function to get the current date, if the question involves "today" 
+<schema>
+{table_info}
+</schema>
+<examples>{example}</examples>
+""" 
+print(sys_prompt[0]["text"])
+
+question = "Find the average invoice total for each country, but only for countries with more than 5 customers, ordered by the average total descending."
+user_prompt = get_user_prompt(question)
+print(user_prompt[0]["content"][0]["text"])
+
+response = converse_with_bedrock(boto3_client, sys_prompt, user_prompt)
+print(response)
+    
+
+thought_process = response.split('<thought_process>')[1].split('</thought_process>')[0].strip()
+sql = response.split('<sql>')[1].split('</sql>')[0].strip()
+
+print("Thought:\n", thought_process)
+print("\nSQL:\n", sql)
+
+
+sql_query = text(sql)
+with Session(engine) as session:
+    result = session.execute(sql_query)
+    for row in result:
+        print(row)
+    
 ```
