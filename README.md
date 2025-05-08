@@ -8,8 +8,6 @@ bash download_demo_corpus.sh
 ---------------------
 ```python
 filepath = '/content/mart_djy_03.txt'
-filename = os.path.basename(filepath)
-
 try:
   if filepath.endswith(".txt"):
     try:
@@ -34,8 +32,6 @@ try:
             for line in daegu_lines:
                 print(line)
 
-            new_filename = filename.replace(".txt", "_daegu.txt")
-            # new_filepath = os.path.join(extract_path, new_filename)
             with open('/content/daegu.txt', 'w', encoding='utf-8') as outfile:
                 outfile.write('\n'.join(daegu_lines))
 
