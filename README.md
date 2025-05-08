@@ -4,6 +4,15 @@ installation
 pip install -r requirements.txt
 bash download_demo_corpus.sh
 ```
+implementation
+--------------------
+```python
+python main.py --query '대구광역시 북구 산격3동 11 건물의 에너지 사용량이 뭐야'
+--model_path 'llama-3.2-1b'
+--gpt_api_key 'your api key'
+--huggingface_api_key 'huggingface access token'
+--db_path '설정한 db_path'
+```
 대구 포함 line 추출
 ---------------------
 ```python
