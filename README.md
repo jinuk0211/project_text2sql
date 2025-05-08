@@ -13,7 +13,7 @@ python main.py --query '대구광역시 북구 산격3동 11 건물의 에너지
 --huggingface_api_key 'huggingface access token'
 --db_path '설정한 db_path'
 ```
-대구 포함 line 추출
+대구광역시 한정 데이터 사용시
 ---------------------
 ```python
 filepath = '/content/mart_djy_03.txt'
