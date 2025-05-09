@@ -1,4 +1,40 @@
 import json
+from langchain.vectorstores import FAISS
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.docstore.document import Document
+import faiss
+from langchain_community.docstore.in_memory import InMemoryDocstore
+from langchain_community.vectorstores import FAISS
+
+def chunk_txt_by_line(file_path, max_lines=100):
+    chunks = []
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for i, line in enumerate(f):
+            # if i >= max_lines:
+            #     br
+            #     eak
+            line = line.strip()
+            if line:  # 빈 줄은 제외 (필요 없으면 이 줄 삭제 가능)
+                chunks.append(line)
+    return chunks
+
+file_path = '/content/drive/MyDrive/ninewatt/mart_djy_03_daegu.txt'
+chunks = chunk_txt_by_line(file_path)
+
+
+documents = [Document(page_content=text,metadata = {'source':'/content/drive/MyDrive/ninewatt/mart_djy_03_daegu.txt'})
+for text in chunks]
+
+index = faiss.IndexFlatL2(len(embeddings.embed_query("hello world")))
+
+vector_store = FAISS(
+    embedding_function=embeddings,
+    index=index,
+    docstore=InMemoryDocstore(),
+    index_to_docstore_id={},
+)
+uuids = [str(uuid4()) for _ in range(len(documents))]
+vector_store.add_documents(documents=documents, ids=uuids)
 
 embed_model = "amazon.titan-embed-text-v2:0"
 
