@@ -6,7 +6,16 @@ text2sql with poor schema - 12%
 text2sql with proper schema - 72%
 text2sql with query decomposition
 ```
-Text-to-SQL 성능을 높이기 위해 해야 할 일 (구글 방식 요약)
+## Text-to-SQL 방법별 성능 비교
+
+| 방법                          | 설명                                                      | 정확도 |
+|-----------------------------|-----------------------------------------------------------|--------|
+| RAG                         | 검색 문서 기반 SQL 생성 (Context Retrieval 후 Prompt 작성)  | 53%    |
+| Text2SQL (Poor Schema)      | 스키마 정보 부족 또는 부정확하게 제공된 경우               | 12%    |
+| Text2SQL (Proper Schema)    | 스키마 구조 명확히 제공 (JSON 등으로)                     | 72%    |
+| Query Decomposition         | 복잡한 질문을 서브질문으로 나누고 병합                    | (값 미제공) |
+
+Text-to-SQL 성능을 높이기 위해 해야 할 일 
 
 1. 스키마와 비즈니스 문맥을 명확히 제공하라
 
