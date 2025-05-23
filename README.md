@@ -13,7 +13,15 @@ text2sql with query decomposition
 | RAG                         | 검색 문서 기반 SQL 생성 (Context Retrieval 후 Prompt 작성)  | 53%    |
 | Text2SQL (Poor Schema)      | 스키마 정보 부족 또는 부정확하게 제공된 경우               | 12%    |
 | Text2SQL (Proper Schema)    | 스키마 구조 명확히 제공 (JSON 등으로)                     | 72%    |
-| Query Decomposition         | 복잡한 질문을 서브질문으로 나누고 병합                    | (값 미제공) |
+| Query Decomposition         | 복잡한 질문을 서브질문으로 나누고 병합                    | (값 미제 |
+
+decomposition
+-----
+2023년 기준, 대구시의 동별 평균 전기 사용량과 평균 도시가스 사용량의 상관계수는 얼마인가요?
+
+2023년 기준, 대구시 건물 데이터를 동별로 그룹화했을 때 평균 전기 사용량(electricity_usage)은 얼마인가요?
+22023년 기준, 대구시 건물 데이터를 동별로 그룹화했을 때 평균 도시가스 사용량(city_gas_usage)은 얼마인가요?
+병합된 테이블에서 전기 사용량과 도시가스 사용량의 피어슨 상관계수를 계산해주세요
 
 Text-to-SQL 성능을 높이기 위해 해야 할 일 
 ----------
