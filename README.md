@@ -16,7 +16,7 @@ text2sql with query decomposition
 | Query Decomposition         | 복잡한 질문을 서브질문으로 나누고 병합                    | (값 미제공) |
 
 Text-to-SQL 성능을 높이기 위해 해야 할 일 
-
+----------
 1. 스키마와 비즈니스 문맥을 명확히 제공하라
 
 LLM은 테이블 구조, 열 이름, 데이터 의미를 알아야 정확한 SQL을 생성함
