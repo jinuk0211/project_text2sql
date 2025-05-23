@@ -1,6 +1,12 @@
 installation
 -------------
 ```bash
+RAG - 53%
+text2sql with poor schema - 12%
+text2sql with proper schema - 72%
+text2sql with query decomposition
+```
+```bash
 pip install -r requirements.txt
 bash download_demo_corpus.sh
 ```
