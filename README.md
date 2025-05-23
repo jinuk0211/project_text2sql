@@ -6,6 +6,37 @@ text2sql with poor schema - 12%
 text2sql with proper schema - 72%
 text2sql with query decomposition
 ```
+Text-to-SQL 성능을 높이기 위해 해야 할 일 (구글 방식 요약)
+
+1. 스키마와 비즈니스 문맥을 명확히 제공하라
+
+LLM은 테이블 구조, 열 이름, 데이터 의미를 알아야 정확한 SQL을 생성함
+
+예시: "user_id"가 고객 ID인지 직원 ID인지 명확히 알려줘야 함
+
+
+2. 사용자 의도를 명확히 파악하고 질문을 재구성하라
+
+모호한 질문 → 명확하게 바꿔주는 후속 질문 생성
+
+예시: “가장 많이 팔린 상품?” → “판매량 기준인가요? 수익 기준인가요?”
+
+
+3. SQL 방언(다른 DB마다 문법 차이)에 맞춰 조정하라
+
+PostgreSQL, MySQL, BigQuery 등마다 SQL 문법 다르므로 맞춤 대응 필요
+
+
+4. 강력한 모델과 프롬프트 조합을 사용하라
+
+Gemini 같은 고성능 LLM 사용 + 예제 기반 학습 (in-context learning)
+
+
+5. 지속적인 자동화 평가 및 개선
+
+LLM-as-a-judge로 자동 평가 → 새로운 프롬프트나 모델 성능 빠르게 비교 가
+
+
 ```bash
 pip install -r requirements.txt
 bash download_demo_corpus.sh
